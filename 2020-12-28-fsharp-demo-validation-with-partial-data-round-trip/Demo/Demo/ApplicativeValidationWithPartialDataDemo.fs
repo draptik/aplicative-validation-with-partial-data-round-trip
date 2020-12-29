@@ -15,7 +15,19 @@ module Result =
         | Error (f, e1s), Error (g, e2s) -> Error (f >> g, e2s @ e1s)
         | Error e, Ok _ -> Error e
         | Ok _, Error e -> Error e
-        
+
+(*
+NOTE: `BindReturn` and `MergeSources` are new in F# 5.
+
+Resources (search for `MergeSources`...):
+
+- https://devblogs.microsoft.com/dotnet/announcing-f-5-preview-1/
+- https://www.codemag.com/Article/2010072/F
+
+- https://thinkbeforecoding.com/post/2020/10/03/applicatives-irl
+- https://thinkbeforecoding.com/post/2020/10/07/applicative-computation-expressions
+- https://thinkbeforecoding.com/post/2020/10/08/applicative-computation-expressions-2
+*)        
 type ValidationBuilder () =
     member _.BindReturn (x, f) = Result.map f x
     member _.MergeSources (x, y) = Result.merge x y
