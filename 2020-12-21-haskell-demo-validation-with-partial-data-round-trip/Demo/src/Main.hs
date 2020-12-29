@@ -45,3 +45,24 @@ validateInput now args =
   first (first (`appEndo` args)) $
   ValidInput <$> validateName args <*> validateDoB now args <*> validateAddress args
 
+{-|
+*Main> current <- getCurrentTime
+*Main> now = utctDay current
+*Main> now
+2020-12-29
+*Main> :t now
+now :: Day
+
+
+*Main> current <- getCurrentTime
+*Main> now = utctDay current
+*Main> validateInput now & Input (Just "Alice") (Just & fromGregorian 2012 4 21) (Just "x")
+
+<interactive>:3:19: error:
+    Variable not in scope:
+      (&) :: (Input -> Either (Input, [String]) ValidInput) -> Input -> t
+
+<interactive>:3:48: error:
+    Variable not in scope: (&) :: (a0 -> Maybe a0) -> Day -> Maybe Day
+*Main>
+-}

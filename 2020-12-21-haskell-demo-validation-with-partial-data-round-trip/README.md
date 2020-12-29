@@ -72,3 +72,5 @@ src/Main.hs:8:1: error:
   | ^^^^^^^^^^^^^^^^^^^^^^
 Failed, no modules loaded.
 ```
+
+Solution: don't use `ghci` for the REPL. Use `cabal repl` instead (a few hours of research...).
